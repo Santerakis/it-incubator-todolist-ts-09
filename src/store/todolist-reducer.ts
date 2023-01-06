@@ -26,7 +26,6 @@ type ChangeTodoListFilterAT = {
     type: typeof CHANGE_TODOLIST_FILTER
     nextFilterValue: FilterValuesType
     id: string
-
 }
 
 export type ActionType = RemoveTodoListAT | AddTodoListAT | ChangeTodoListTitleAT | ChangeTodoListFilterAT
