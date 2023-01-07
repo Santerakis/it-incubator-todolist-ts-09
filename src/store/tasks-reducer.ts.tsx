@@ -1,13 +1,19 @@
 import {TasksStateType, TaskType} from "../App";
 import {v1} from "uuid";
+import {AddTodoListAT} from "./todolist-reducer";
 
 export type RemoveTaskActionType = ReturnType<typeof removeTaskAC>
 export type AddTaskActionType = ReturnType<typeof addTaskAC>
-export type ChangeTaskStatusAC = ReturnType<typeof changeTaskStatusAC>
-export type ChangeTaskTitleAC = ReturnType<typeof changeTaskTitleAC>
+export type ChangeTaskStatusType = ReturnType<typeof changeTaskStatusAC>
+export type ChangeTaskTitleType = ReturnType<typeof changeTaskTitleAC>
 
 
-type ActionsType = RemoveTaskActionType | AddTaskActionType | ChangeTaskStatusAC | ChangeTaskTitleAC
+type ActionsType = RemoveTaskActionType
+    | AddTaskActionType
+    | ChangeTaskStatusType
+    | ChangeTaskTitleType
+
+    | AddTodoListAT  //на таскредусер и такой тип экшенов будет обрабатывать
 
 export const tasksReducer = (state: TasksStateType, action: ActionsType) => {
     switch (action.type) {
@@ -25,6 +31,8 @@ export const tasksReducer = (state: TasksStateType, action: ActionsType) => {
             return {...state,
                 [action.todoListId]: state[action.todoListId].map(t => t.id === action.taskId ? {...t, title: action.title} : t)
             }
+        case 'ADD-TODOLIST':
+            return {...state, [action.todolistId]: []}
         default:
             throw new Error("I don't understand this type")
     }
