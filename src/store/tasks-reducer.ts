@@ -1,6 +1,6 @@
 import {TasksStateType, TaskType} from "../App";
 import {v1} from "uuid";
-import {AddTodoListAT} from "./todolist-reducer";
+import {AddTodoListAT, RemoveTodoListAT} from "./todolist-reducer";
 
 export type RemoveTaskActionType = ReturnType<typeof removeTaskAC>
 export type AddTaskActionType = ReturnType<typeof addTaskAC>
@@ -14,6 +14,7 @@ type ActionsType = RemoveTaskActionType
     | ChangeTaskTitleType
 
     | AddTodoListAT  //на таскредусер и такой тип экшенов будет обрабатывать
+    | RemoveTodoListAT
 
 export const tasksReducer = (state: TasksStateType, action: ActionsType) => {
     switch (action.type) {
@@ -33,6 +34,12 @@ export const tasksReducer = (state: TasksStateType, action: ActionsType) => {
             }
         case 'ADD-TODOLIST':
             return {...state, [action.todolistId]: []}
+        case 'REMOVE-TODOLIST': {
+            let copyState = {...state}
+            delete copyState[action.id]
+            //const {[action.id]: [], ...rest]} = {state}  //удаление свойства из объекта с помощью деструктуризации
+            return copyState
+        }
         default:
             throw new Error("I don't understand this type")
     }

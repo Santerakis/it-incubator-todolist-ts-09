@@ -9,7 +9,7 @@ export const ADD_TODOLIST = 'ADD-TODOLIST' as const // как константа
 export const CHANGE_TITLE = 'CHANGE-TODOLIST-TITLE' as const
 export const CHANGE_TODOLIST_FILTER = 'CHANGE-TODOLIST-FILTER' as const
 
-type RemoveTodoListAT = {
+export type RemoveTodoListAT = {
     type: typeof REMOVE_TODOLIST  //или type: 'REMOVE-TODOLIST' без использования констант
     id: string
 }
